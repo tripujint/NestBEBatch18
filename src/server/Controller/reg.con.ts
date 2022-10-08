@@ -42,14 +42,17 @@ export class RegControll {
     }
   }
   @Post()
-  @UseInterceptors(FileFieldsInterceptor([{ name: 'foto' }, { name: 'file' }]))
+  @UseInterceptors(
+    FileFieldsInterceptor([{ name: 'regionPhoto' }, { name: 'regionFile' }]),
+  )
   public async Create(@UploadedFiles() file: any, @Body() fields: any) {
     try {
       if (file) {
         const region = await this.RegRepo.save({
           regionName: fields.regionName,
-          regionPhoto: file.file ? file.file[0].originalname : null,
-          regionFile: file.foto ? file.foto[0].originalname : null,
+          // eslint-disable-next-line prettier/prettier
+          regionPhoto: file.regionPhoto ? file.regionPhoto[0].originalname : null,
+          regionFile: file.regionFile ? file.regionFile[0].originalname : null,
         });
         return region;
       }
@@ -58,7 +61,9 @@ export class RegControll {
     }
   }
   @Put(':id')
-  @UseInterceptors(FileFieldsInterceptor([{ name: 'foto' }, { name: 'file' }]))
+  @UseInterceptors(
+    FileFieldsInterceptor([{ name: 'regionPhoto' }, { name: 'regionFile' }]),
+  )
   public async Updated(
     @UploadedFiles() file: any,
     @Body() fields: any,
@@ -68,8 +73,9 @@ export class RegControll {
       if (file) {
         await this.RegRepo.update(id, {
           regionName: fields.region_name,
-          regionPhoto: file.file ? file.file[0].originalname : null,
-          regionFile: file.foto ? file.foto[0].originalname : null,
+          // eslint-disable-next-line prettier/prettier
+          regionPhoto: file.regionPhoto ? file.regionPhoto[0].originalname : null,
+          regionFile: file.regionFile ? file.regionFile[0].originalname : null,
         });
         return await this.RegRepo.findOne({ where: { regionId: id } });
       }
