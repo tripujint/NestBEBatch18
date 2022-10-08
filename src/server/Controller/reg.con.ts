@@ -67,7 +67,7 @@ export class RegControll {
     try {
       if (file) {
         await this.RegRepo.update(id, {
-          regionName: fields.regionName,
+          regionName: fields.region_name,
           regionPhoto: file.file ? file.file[0].originalname : null,
           regionFile: file.foto ? file.foto[0].originalname : null,
         });

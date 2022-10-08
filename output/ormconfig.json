@@ -6,8 +6,8 @@
     "port": 5432,
     "username": "postgres",
     "password": "admin",
-    "database": "",
+    "database": "CodeinBatch18",
     "synchronize": false,
-    "entities": ["entities/*.js"]
+    "entities": ["./src/entities/*.js"]
   }
 ]
